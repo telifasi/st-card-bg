@@ -11,15 +11,11 @@ git add .
 REM 检查是否有更改
 git diff-index --quiet HEAD 2>nul
 if %errorlevel% equ 0 (
-    echo 没有检测到文件变化，无需同步。
-    echo.
-    pause
-    exit /b 0
+    echo [2/3] 没有检测到文件变化，跳过提交
+) else (
+    echo [2/3] 正在提交更改...
+    git commit -m "更新文件 - %date% %time%"
 )
-
-REM 提交更改（使用当前时间作为提交信息）
-echo [2/3] 正在提交更改...
-git commit -m "更新文件 - %date% %time%"
 
 REM 推送到 GitHub
 echo [3/3] 正在推送到 GitHub...
